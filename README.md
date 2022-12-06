@@ -1,4 +1,4 @@
-## uniApp-template
+## [uniApp-template](https://github.com/CalmHarbin/uniApp-template)
 
 ### 前言
 
@@ -6,16 +6,16 @@
 
 实现功能
 
--   <input type="checkbox" checked>使用 `Vue3` 进行开发</input>
--   <input type="checkbox" checked>构建工具 使用 `Vite`</input>
--   <input type="checkbox" checked>使用 `Vuex`</input>
--   <input type="checkbox" checked>集成 `Typescript`</input>
--   <input type="checkbox" checked>集成 `Scss` 来编写 css</input>
--   <input type="checkbox" checked>集成 `Eslint` + `Stylelint` + `Prettier` 来规范和格式化代码</input>
--   <input type="checkbox" checked>环境区分</input>
--   <input type="checkbox" checked>封装 `uni-request` 请求</input>
--   <input type="checkbox" checked>集成 `Mock` 辅助开发</input>
--   <input type="checkbox" checked>集成 `uni-ui`</input>
+- <input type="checkbox" checked>使用 `Vue3` 进行开发</input>
+- <input type="checkbox" checked>构建工具 使用 `Vite`</input>
+- <input type="checkbox" checked>使用 `Vuex`</input>
+- <input type="checkbox" checked>集成 `Typescript`</input>
+- <input type="checkbox" checked>集成 `Scss` 来编写 css</input>
+- <input type="checkbox" checked>集成 `Eslint` + `Stylelint` + `Prettier` 来规范和格式化代码</input>
+- <input type="checkbox" checked>环境区分</input>
+- <input type="checkbox" checked>封装 `uni-request` 请求</input>
+- <input type="checkbox" checked>集成 `Mock` 辅助开发</input>
+- <input type="checkbox" checked>集成 `uni-ui`</input>
 
 项目整体目录
 
@@ -86,51 +86,51 @@ import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [uni()],
-    resolve: {
-        // 配置别名
-        alias: {
-            '@': resolve(__dirname, 'src')
-        }
-    },
-    css: {
-        // css预处理器
-        preprocessorOptions: {
-            scss: {
-                // 因为uni.scss可以全局使用，这里根据自己的需求调整
-                additionalData: '@import "./src/styles/global.scss";'
-            }
-        }
-    },
-    // 开发服务器配置
-    server: {
-        host: '0.0.0.0',
-        port: 8080,
-        // 请求代理
-        proxy: {
-            // 个人习惯，这里就用/dev作为前缀了
-            '/dev': {
-                target: 'https://xxx.com/api',
-                changeOrigin: true,
-                // 路径重写，去掉/dev
-                rewrite: (path) => path.replace(/^\/dev/, '')
-            }
-        }
-    },
-    build: {
-        // 禁用 gzip 压缩大小报告，以提升构建性能
-        brotliSize: false,
-        /** 配置h5打包js,css,img分别在不同文件夹start */
-        assetsDir: 'static/img/',
-        rollupOptions: {
-            output: {
-                chunkFileNames: 'static/js/[name]-[hash].js',
-                entryFileNames: 'static/js/[name]-[hash].js',
-                assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
-            }
-        }
-        /** 配置h5打包js,css,img分别在不同文件夹end */
+  plugins: [uni()],
+  resolve: {
+    // 配置别名
+    alias: {
+      '@': resolve(__dirname, 'src')
     }
+  },
+  css: {
+    // css预处理器
+    preprocessorOptions: {
+      scss: {
+        // 因为uni.scss可以全局使用，这里根据自己的需求调整
+        additionalData: '@import "./src/styles/global.scss";'
+      }
+    }
+  },
+  // 开发服务器配置
+  server: {
+    host: '0.0.0.0',
+    port: 8080,
+    // 请求代理
+    proxy: {
+      // 个人习惯，这里就用/dev作为前缀了
+      '/dev': {
+        target: 'https://xxx.com/api',
+        changeOrigin: true,
+        // 路径重写，去掉/dev
+        rewrite: (path) => path.replace(/^\/dev/, '')
+      }
+    }
+  },
+  build: {
+    // 禁用 gzip 压缩大小报告，以提升构建性能
+    brotliSize: false,
+    /** 配置h5打包js,css,img分别在不同文件夹start */
+    assetsDir: 'static/img/',
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'static/js/[name]-[hash].js',
+        entryFileNames: 'static/js/[name]-[hash].js',
+        assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+      }
+    }
+    /** 配置h5打包js,css,img分别在不同文件夹end */
+  }
 })
 ```
 
@@ -181,7 +181,7 @@ import { rootStateType } from './index'
 import { systemStateType } from './modules/system'
 
 export interface StateType extends rootStateType {
-    system: systemStateType
+  system: systemStateType
 }
 ```
 
@@ -200,17 +200,17 @@ const keys = Object.keys(files)
 const modules: any = {}
 
 keys.forEach((key) => {
-    if (Object.prototype.hasOwnProperty.call(files, key)) {
-        // 提取文件的名字作为模块名
-        modules[key.replace(/(\.\/modules\/|\.ts)/g, '')] = files[key].default
-    }
+  if (Object.prototype.hasOwnProperty.call(files, key)) {
+    // 提取文件的名字作为模块名
+    modules[key.replace(/(\.\/modules\/|\.ts)/g, '')] = files[key].default
+  }
 })
 
 /** 全局的state,这个看自己的需求，如果有用到就在createStore中添加 */
 export interface rootStateType {}
 
 export default createStore<StateType>({
-    modules
+  modules
 })
 ```
 
@@ -221,14 +221,14 @@ import { Module } from 'vuex'
 import { rootStateType } from '@/store'
 
 export interface systemStateType {
-    title: string
+  title: string
 }
 
 const systemModule: Module<systemStateType, rootStateType> = {
-    namespaced: true,
-    state: () => ({
-        title: '你好，我是uni-app'
-    })
+  namespaced: true,
+  state: () => ({
+    title: '你好，我是uni-app'
+  })
 }
 
 export default systemModule
@@ -243,10 +243,10 @@ import store from './store'
 
 // eslint-disable-next-line import/prefer-default-export
 export function createApp() {
-    const app = createSSRApp(App).use(store)
-    return {
-        app
-    }
+  const app = createSSRApp(App).use(store)
+  return {
+    app
+  }
 }
 ```
 
@@ -280,15 +280,15 @@ import { Store } from 'vuex'
  */
 // declare module '@vue/runtime-core' {
 declare module 'vue' {
-    interface ComponentCustomProperties {
-        // 这里扩展this.$store，还可以在这里对this添加其他的声明
-        $store: Store<StateType>
-    }
+  interface ComponentCustomProperties {
+    // 这里扩展this.$store，还可以在这里对this添加其他的声明
+    $store: Store<StateType>
+  }
 }
 
 // 扩展useStore声明
 declare module 'vuex' {
-    export function useStore<S = StateType>(injectKey?: InjectionKey<Store<S>> | string): Store<S>
+  export function useStore<S = StateType>(injectKey?: InjectionKey<Store<S>> | string): Store<S>
 }
 
 // 这个导出一个东西也可以，或者上面引入vue
@@ -311,59 +311,59 @@ pnpm add eslint -D
 npx eslint --init
 ```
 
--   How would you like to use ESLint? （你想如何使用 ESLint?）
+- How would you like to use ESLint? （你想如何使用 ESLint?）
 
-    <img src="http://file.calmharbin.icu/c1424c45d06d4900807b3e0435911f4e_tplv-k3u1fbpfcp-watermark.png" width="400">
+  <img src="http://file.calmharbin.icu/c1424c45d06d4900807b3e0435911f4e_tplv-k3u1fbpfcp-watermark.png" width="400">
 
-    我们这里选择 To check syntax, find problems, and enforce code style（检查语法、发现问题并强制执行代码风格）
+  我们这里选择 To check syntax, find problems, and enforce code style（检查语法、发现问题并强制执行代码风格）
 
--   What type of modules does your project use?（你的项目使用哪种类型的模块?）
+- What type of modules does your project use?（你的项目使用哪种类型的模块?）
 
-    <img src="http://file.calmharbin.icu/26e9ec1fd2934265847b0dabe908e6be_tplv-k3u1fbpfcp-watermark.png" width="400">
+  <img src="http://file.calmharbin.icu/26e9ec1fd2934265847b0dabe908e6be_tplv-k3u1fbpfcp-watermark.png" width="400">
 
-    我们这里选择 JavaScript modules (import/export)
+  我们这里选择 JavaScript modules (import/export)
 
--   Which framework does your project use? （你的项目使用哪种框架?）
+- Which framework does your project use? （你的项目使用哪种框架?）
 
-    <img src="http://file.calmharbin.icu/412df4bebb2c43b2858d5093652cc8ca_tplv-k3u1fbpfcp-watermark.png" width="400">
+  <img src="http://file.calmharbin.icu/412df4bebb2c43b2858d5093652cc8ca_tplv-k3u1fbpfcp-watermark.png" width="400">
 
-    我们这里选择 Vue.js
+  我们这里选择 Vue.js
 
--   Does your project use TypeScript?（你的项目是否使用 TypeScript？）
+- Does your project use TypeScript?（你的项目是否使用 TypeScript？）
 
-    <img src="http://file.calmharbin.icu/ee8aa15a0de84f2d9f16402f6870b3cd_tplv-k3u1fbpfcp-watermark.png" width="400">
+  <img src="http://file.calmharbin.icu/ee8aa15a0de84f2d9f16402f6870b3cd_tplv-k3u1fbpfcp-watermark.png" width="400">
 
-    我们这里选择 Yes
+  我们这里选择 Yes
 
--   Where does your code run?（你的代码在哪里运行?）
+- Where does your code run?（你的代码在哪里运行?）
 
-    <img src="http://file.calmharbin.icu/c86eb167b09a414dabb7ec3edb70a377_tplv-k3u1fbpfcp-watermark.png" width="400">
+  <img src="http://file.calmharbin.icu/c86eb167b09a414dabb7ec3edb70a377_tplv-k3u1fbpfcp-watermark.png" width="400">
 
-    我们这里选择 Browser 和 Node（按空格键进行选择，选完按回车键确定）
+  我们这里选择 Browser 和 Node（按空格键进行选择，选完按回车键确定）
 
--   How would you like to define a style for your project?（你想怎样为你的项目定义风格？）
+- How would you like to define a style for your project?（你想怎样为你的项目定义风格？）
 
-    <img src="http://file.calmharbin.icu/f8beb21b44a14dbba7e0b9153d1f6a03_tplv-k3u1fbpfcp-watermark.png" width="400">
+  <img src="http://file.calmharbin.icu/f8beb21b44a14dbba7e0b9153d1f6a03_tplv-k3u1fbpfcp-watermark.png" width="400">
 
-    我们这里选择 Use a popular style guide（使用一种流行的风格指南）
+  我们这里选择 Use a popular style guide（使用一种流行的风格指南）
 
--   Which style guide do you want to follow?（你想遵循哪一种风格指南?）
+- Which style guide do you want to follow?（你想遵循哪一种风格指南?）
 
-    <img src="http://file.calmharbin.icu/596c3755247a45a990d8c847d76fdad1_tplv-k3u1fbpfcp-watermark.png" width="400">
+  <img src="http://file.calmharbin.icu/596c3755247a45a990d8c847d76fdad1_tplv-k3u1fbpfcp-watermark.png" width="400">
 
-    我们这里选择 Airbnb（github 上 star 最高）
+  我们这里选择 Airbnb（github 上 star 最高）
 
--   What format do you want your config file to be in?（你希望你的配置文件是什么格式?）
+- What format do you want your config file to be in?（你希望你的配置文件是什么格式?）
 
-    <img src="http://file.calmharbin.icu/6217a3458af34010bd8a3a55a0c03629_tplv-k3u1fbpfcp-watermark.png" width="400">
+  <img src="http://file.calmharbin.icu/6217a3458af34010bd8a3a55a0c03629_tplv-k3u1fbpfcp-watermark.png" width="400">
 
-    我们这里选择 JavaScript
+  我们这里选择 JavaScript
 
--   Would you like to install them now with npm?（你想现在就用 NPM 安装它们吗?）
+- Would you like to install them now with npm?（你想现在就用 NPM 安装它们吗?）
 
-    <img src="http://file.calmharbin.icu/6b1be913778348d1a59c2d7ea4c27a0c_tplv-k3u1fbpfcp-watermark.png" width="400">
+  <img src="http://file.calmharbin.icu/6b1be913778348d1a59c2d7ea4c27a0c_tplv-k3u1fbpfcp-watermark.png" width="400">
 
-    我们这里选择 No，根据提示需要安装的依赖包，我们自己使用 pnpm 安装。注意 eslint 的版本，之前我们安装过可以不再安装了。
+  我们这里选择 No，根据提示需要安装的依赖包，我们自己使用 pnpm 安装。注意 eslint 的版本，之前我们安装过可以不再安装了。
 
 ```sh
 pnpm add -D eslint-plugin-vue@latest @typescript-eslint/eslint-plugin@latest eslint-config-airbnb-base@latest eslint@^8.2.0 eslint-plugin-import@^2.25.2 @typescript-eslint/parser@latest
@@ -402,18 +402,18 @@ pnpm add -D stylelint stylelint-config-rational-order stylelint-config-recommend
 
 ```ts
 module.exports = {
-    extends: [
-        'stylelint-config-standard-scss',
-        'stylelint-config-recommended-vue',
-        'stylelint-config-recommended-vue/scss',
-        'stylelint-config-rational-order'
-    ],
-    rules: {
-        // 使用4格缩进
-        indentation: 4,
-        // 可以使用rpx单位
-        'unit-no-unknown': [true, { ignoreUnits: ['rpx'] }]
-    }
+  extends: [
+    'stylelint-config-standard-scss',
+    'stylelint-config-recommended-vue',
+    'stylelint-config-recommended-vue/scss',
+    'stylelint-config-rational-order'
+  ],
+  rules: {
+    // 使用4格缩进
+    indentation: 4,
+    // 可以使用rpx单位
+    'unit-no-unknown': [true, { ignoreUnits: ['rpx'] }]
+  }
 }
 ```
 
@@ -558,8 +558,8 @@ env: {
 
 实现功能：
 
--   可以直接区分开发环境和生产环境
--   自定义环境变量增加 typescript 提示
+- 可以直接区分开发环境和生产环境
+- 自定义环境变量增加 typescript 提示
 
 在根目录下新建 env 文件夹用来存放环境变量配置文件，同时修改 vite 配置（环境变量的根目录）。
 
@@ -569,7 +569,7 @@ env: {
 
 ```ts
 export default defineConfig({
-    envDir: resolve(__dirname, 'env')
+  envDir: resolve(__dirname, 'env')
 })
 ```
 
@@ -593,8 +593,8 @@ export default defineConfig({
 ```ts
 /** 扩展环境变量import.meta.env */
 interface ImportMetaEnv {
-    /** 这里增加自定义的声明 */
-    VITE_REQUEST_BASE_URL: string
+  /** 这里增加自定义的声明 */
+  VITE_REQUEST_BASE_URL: string
 }
 ```
 
@@ -602,11 +602,11 @@ interface ImportMetaEnv {
 
 实现功能：
 
--   统一配置接口地址
--   统一设置超时时间/报文格式/报文加密
--   统一身份认证
--   统一处理登录超时/接口异常提示
--   统一返回接口格式
+- 统一配置接口地址
+- 统一设置超时时间/报文格式/报文加密
+- 统一身份认证
+- 统一处理登录超时/接口异常提示
+- 统一返回接口格式
 
 新建 `src/utils/request/index.ts` 用来存放我们的代码。
 
@@ -621,80 +621,80 @@ interface ImportMetaEnv {
  */
 
 type responseType = {
-    code: number
-    success: boolean
-    msg: string
-    result: any
+  code: number
+  success: boolean
+  msg: string
+  result: any
 }
 
 const request = (config: UniApp.RequestOptions) => {
-    let url: string
-    if (/^(http|https):\/\/.*/.test(config.url)) {
-        // 如果是以http/https开头的则不添加VITE_REQUEST_BASE_URL
-        url = config.url
-    } else {
-        url = import.meta.env.VITE_REQUEST_BASE_URL + config.url
-    }
-    return new Promise<responseType>((resolve, reject) => {
-        uni.request({
-            ...config,
-            url,
-            /** 统一设置超时时间 */
-            timeout: config.timeout || 60000,
-            header: {
-                ...config.header,
-                /** 统一报文格式 */
-                'Content-Type': 'application/json;charset=UTF-8'
-                /** 统一身份认证 */
-                // Authorization: Token
-            },
-            success(res) {
-                // 200状态码表示成功
-                if (res.statusCode === 200) {
-                    resolve(res.data as any)
-                    return
-                }
-                /**
-                 * 这里可以做一些登录超时/接口异常提示等处理
-                 */
-                reject(res.data)
-            },
-            fail(result) {
-                reject(result)
-            }
-        })
+  let url: string
+  if (/^(http|https):\/\/.*/.test(config.url)) {
+    // 如果是以http/https开头的则不添加VITE_REQUEST_BASE_URL
+    url = config.url
+  } else {
+    url = import.meta.env.VITE_REQUEST_BASE_URL + config.url
+  }
+  return new Promise<responseType>((resolve, reject) => {
+    uni.request({
+      ...config,
+      url,
+      /** 统一设置超时时间 */
+      timeout: config.timeout || 60000,
+      header: {
+        ...config.header,
+        /** 统一报文格式 */
+        'Content-Type': 'application/json;charset=UTF-8'
+        /** 统一身份认证 */
+        // Authorization: Token
+      },
+      success(res) {
+        // 200状态码表示成功
+        if (res.statusCode === 200) {
+          resolve(res.data as any)
+          return
+        }
+        /**
+         * 这里可以做一些登录超时/接口异常提示等处理
+         */
+        reject(res.data)
+      },
+      fail(result) {
+        reject(result)
+      }
     })
+  })
 }
 
 export default {
-    /**
-     * get请求
-     * @param url 请求地址
-     * @param data 请求的参数
-     * @param options 其他请求配置
-     */
-    get: (url: string, data?: UniApp.RequestOptions['data'], options?: UniApp.RequestOptions) => {
-        return request({
-            ...options,
-            url,
-            data,
-            method: 'GET'
-        })
-    },
-    /**
-     * post请求
-     * @param url 请求地址
-     * @param data 请求的参数
-     * @param options 其他请求配置
-     */
-    post: (url: string, data?: UniApp.RequestOptions['data'], options?: UniApp.RequestOptions) => {
-        return request({
-            ...options,
-            url,
-            data,
-            method: 'POST'
-        })
-    }
+  /**
+   * get请求
+   * @param url 请求地址
+   * @param data 请求的参数
+   * @param options 其他请求配置
+   */
+  get: (url: string, data?: UniApp.RequestOptions['data'], options?: UniApp.RequestOptions) => {
+    return request({
+      ...options,
+      url,
+      data,
+      method: 'GET'
+    })
+  },
+  /**
+   * post请求
+   * @param url 请求地址
+   * @param data 请求的参数
+   * @param options 其他请求配置
+   */
+  post: (url: string, data?: UniApp.RequestOptions['data'], options?: UniApp.RequestOptions) => {
+    return request({
+      ...options,
+      url,
+      data,
+      method: 'POST'
+    })
+  }
 }
 ```
 
@@ -704,13 +704,13 @@ export default {
 import request from '@/utils/request'
 
 request
-    .get('/api/getList', {
-        page: 1,
-        size: 20
-    })
-    .then((res) => {
-        console.log(res)
-    })
+  .get('/api/getList', {
+    page: 1,
+    size: 20
+  })
+  .then((res) => {
+    console.log(res)
+  })
 ```
 
 ### 集成 `Mock` 辅助开发
@@ -719,10 +719,10 @@ request
 
 实现功能：
 
--   统一管理我们想要 mock 的接口
--   便捷切换是否 mock
--   自由控制哪些接口 mock，哪些接口真实请求
--   对于调用接口的地方是否 mock 是无感知的
+- 统一管理我们想要 mock 的接口
+- 便捷切换是否 mock
+- 自由控制哪些接口 mock，哪些接口真实请求
+- 对于调用接口的地方是否 mock 是无感知的
 
 比如：
 
@@ -757,15 +757,15 @@ import Mock from 'mockjs'
 
 // 基于我们制定的规则，这里必须做下判断，这个很重要。
 if (/\/mock$/.test(import.meta.env.VITE_REQUEST_BASE_URL)) {
-    // 这里添加 /getUserInfo 这个接口mock数据
-    Mock.mock(`${import.meta.env.VITE_REQUEST_BASE_URL}/getUserInfo`, {
-        code: 200,
-        success: true,
-        msg: '',
-        result: {
-            name: Mock.Random.cname()
-        }
-    })
+  // 这里添加 /getUserInfo 这个接口mock数据
+  Mock.mock(`${import.meta.env.VITE_REQUEST_BASE_URL}/getUserInfo`, {
+    code: 200,
+    success: true,
+    msg: '',
+    result: {
+      name: Mock.Random.cname()
+    }
+  })
 }
 ```
 
@@ -783,18 +783,18 @@ import '../mock'
 import Mock from 'mockjs'
 
 if (/^(http|https):\/\/.*/.test(config.url)) {
-    // 如果是以http/https开头的则不添加VITE_REQUEST_BASE_URL
-    url = config.url
-    // eslint-disable-next-line no-underscore-dangle
+  // 如果是以http/https开头的则不添加VITE_REQUEST_BASE_URL
+  url = config.url
+  // eslint-disable-next-line no-underscore-dangle
 } else if (Mock._mocked[import.meta.env.VITE_REQUEST_BASE_URL + config.url]) {
-    // 如果是mock数据,Mock._mocked上记录有所有已设置的mock规则。
-    url = import.meta.env.VITE_REQUEST_BASE_URL + config.url
+  // 如果是mock数据,Mock._mocked上记录有所有已设置的mock规则。
+  url = import.meta.env.VITE_REQUEST_BASE_URL + config.url
 } else {
-    /**
-     * 开启mock时需要去掉mock路径,不能影响正常接口了。
-     * 如果碰巧你接口是 /api/mock/xxx这种,那VITE_REQUEST_BASE_URL就配置/api/mock/mock吧
-     */
-    url = import.meta.env.VITE_REQUEST_BASE_URL.replace(/\/mock$/, '') + config.url
+  /**
+   * 开启mock时需要去掉mock路径,不能影响正常接口了。
+   * 如果碰巧你接口是 /api/mock/xxx这种,那VITE_REQUEST_BASE_URL就配置/api/mock/mock吧
+   */
+  url = import.meta.env.VITE_REQUEST_BASE_URL.replace(/\/mock$/, '') + config.url
 }
 ```
 
@@ -805,8 +805,8 @@ if (/^(http|https):\/\/.*/.test(config.url)) {
 
 // 扩展mock
 declare module 'mockjs' {
-    /** 所有已注册的mock规则  */
-    const _mocked: Record<string, any>
+  /** 所有已注册的mock规则  */
+  const _mocked: Record<string, any>
 }
 ```
 
@@ -825,18 +825,18 @@ pnpm add @dcloudio/uni-ui
 ```jsonc
 // pages.json
 {
-    "easycom": {
-        "autoscan": true,
-        "custom": {
-            // uni-ui 规则如下配置
-            "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
-        }
-    },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      // uni-ui 规则如下配置
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
+  },
 
-    // 其他内容
-    "pages": [
-        // ...
-    ]
+  // 其他内容
+  "pages": [
+    // ...
+  ]
 }
 ```
 
@@ -864,5 +864,5 @@ H5 和小程序效果图
 
 TODO：
 
--   <input type="checkbox">使用 `Hbuilder` 创建 `uni-app` 模板</input>
--   <input type="checkbox">搭建一个 `Taro+vue3` 模板</input>
+- <input type="checkbox">使用 `Hbuilder` 创建 `uni-app` 模板</input>
+- <input type="checkbox">搭建一个 `Taro+vue3` 模板</input>
